@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#fff8f6">
+    <title>Happy Birthday, Sanona!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            color-scheme: light;
+            --ink: #432f3c;
+            --muted: #806d79;
+            --rose: #c85678;
+            --rose-dark: #a83e61;
+            --rose-pale: #fde8ed;
+            --cream: #fff8f6;
+            --card: rgba(255, 255, 255, 0.82);
+            --line: rgba(153, 92, 119, 0.13);
+            --shadow: 0 24px 70px rgba(106, 57, 80, 0.10);
+        }
+
+        * { box-sizing: border-box; }
+
+        [hidden] { display: none !important; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            min-width: 320px;
+            min-height: 100vh;
+            margin: 0;
+            overflow-x: hidden;
+            background:
+                radial-gradient(ellipse at 8% 16%, rgba(255, 214, 222, 0.46), transparent 34rem),
+                radial-gradient(ellipse at 94% 40%, rgba(255, 231, 203, 0.40), transparent 30rem),
+                var(--cream);
+            color: var(--ink);
+            font-family: "DM Sans", sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body::before {
+            position: fixed;
+            z-index: -1;
+            inset: 0;
+            background: url("collage.png") center / cover no-repeat;
+            content: "";
+            opacity: 0.08;
+            pointer-events: none;
+        }
+
+        button, input { font: inherit; }
+        button { color: inherit; }
+        a { color: inherit; }
+
+        .page-shell {
+            width: min(1080px, calc(100% - 40px));
+            margin: 0 auto;
+        }
+
+        .site-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 82px;
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--rose-dark);
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.015em;
+            text-decoration: none;
+        }
+
+        .brand-mark {
+            display: grid;
+            width: 36px;
+            height: 36px;
+            place-items: center;
+            border: 1px solid rgba(200, 86, 120, 0.18);
+            border-radius: 13px;
+            background: #fff;
+            font-size: 1.1rem;
+        }
+
+        .site-nav { display: flex; gap: 28px; }
+
+        .site-nav a {
+            color: var(--muted);
+            font-size: 0.88rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: color 180ms ease;
+        }
+
+        .site-nav a:hover, .site-nav a:focus-visible { color: var(--rose-dark); }
+
+        .hero-card {
+            position: relative;
+            display: grid;
+            min-height: 470px;
+            grid-template-columns: 1fr 0.9fr;
+            align-items: center;
+            gap: 24px;
+            overflow: hidden;
+            padding: 48px 64px;
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            border-radius: 34px;
+            background: linear-gradient(125deg, rgba(255,255,255,.94), rgba(255,244,245,.86));
+            box-shadow: var(--shadow);
+        }
+
+        .hero-card::before, .hero-card::after {
+            position: absolute;
+            width: 230px;
+            height: 230px;
+            border: 1px solid rgba(200, 86, 120, 0.10);
+            border-radius: 50%;
+            content: "";
+            pointer-events: none;
+        }
+
+        .hero-card::before { top: -150px; left: 39%; }
+        .hero-card::after { right: -150px; bottom: -155px; }
+
+        .hero-copy { position: relative; z-index: 1; }
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin: 0 0 17px;
+            color: var(--rose-dark);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+        }
+
+        .eyebrow::before {
+            width: 22px;
+            height: 1px;
+            background: currentColor;
+            content: "";
+        }
+
+        h1, h2, h3, p { margin-top: 0; }
+
+        h1, h2, .memory-title {
+            font-family: "Playfair Display", Georgia, serif;
+        }
+
+        h1 {
+            max-width: 480px;
+            margin-bottom: 17px;
+            font-size: clamp(3rem, 5vw, 4.5rem);
+            font-weight: 600;
+            letter-spacing: -0.055em;
+            line-height: 1.02;
+        }
+
+        h1 span { color: var(--rose); }
+
+        .hero-description {
+            max-width: 410px;
+            margin-bottom: 26px;
+            color: var(--muted);
+            font-size: 1.04rem;
+            line-height: 1.8;
+        }
+
+        .wish-button {
+            display: inline-flex;
+            min-height: 50px;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 0 22px;
+            border: 0;
+            border-radius: 999px;
+            background: var(--rose);
+            box-shadow: 0 10px 24px rgba(200, 86, 120, 0.23);
+            color: white;
+            cursor: pointer;
+            font-size: 0.91rem;
+            font-weight: 700;
+            transition: background 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+        }
+
+        .wish-button:hover {
+            transform: translateY(-2px);
+            background: var(--rose-dark);
+            box-shadow: 0 13px 28px rgba(200, 86, 120, 0.30);
+        }
+
+        .wish-actions {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 11px;
+        }
+
+        .wish-button.is-secondary {
+            border: 1px solid rgba(200, 86, 120, 0.22);
+            background: rgba(255, 255, 255, 0.76);
+            box-shadow: none;
+            color: var(--rose-dark);
+        }
+
+        .wish-button.is-secondary:hover {
+            background: white;
+            box-shadow: 0 8px 18px rgba(106, 57, 80, 0.09);
+        }
+
+        .wish-button:disabled {
+            cursor: wait;
+            opacity: 0.72;
+            transform: none;
+        }
+
+        .wish-button:focus-visible, .site-nav a:focus-visible {
+            outline: 3px solid rgba(200, 86, 120, 0.42);
+            outline-offset: 4px;
+        }
+
+        .wish-hint {
+            min-height: 22px;
+            margin: 12px 0 0;
+            color: var(--muted);
+            font-size: 0.78rem;
+        }
+
+        .cake-stage {
+            position: relative;
+            display: grid;
+            min-height: 340px;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            align-items: center;
+            gap: 0;
+            place-items: center;
+        }
+
+        .cake-stage::before {
+            position: absolute;
+            width: min(310px, 85%);
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: radial-gradient(circle, #fff0f1 0, rgba(255,240,241,0.68) 58%, transparent 70%);
+            content: "";
+        }
+
+        .cake-art {
+            position: relative;
+            z-index: 1;
+            width: 125%;
+            height: clamp(170px, 42vw, 260px);
+            justify-self: center;
+            scale: 1.2;
+            transform-origin: center;
+            overflow: visible;
+            object-fit: contain;
+            filter: drop-shadow(0 14px 12px rgba(104, 55, 75, 0.12));
+            animation: cake-arrive 700ms cubic-bezier(.2,.8,.2,1) both;
+        }
+
+        .birthday-portrait {
+            position: relative;
+            z-index: 1;
+            display: block;
+            width: 100%;
+            height: clamp(170px, 42vw, 260px);
+            object-fit: cover;
+            object-position: center bottom;
+            translate: -12px 0;
+            scale: 1.25;
+            transform-origin: right bottom;
+            filter: drop-shadow(0 12px 12px rgba(104, 55, 75, 0.14));
+            animation: cake-arrive 700ms cubic-bezier(.2,.8,.2,1) both;
+        }
+
+        .flame {
+            transform-box: fill-box;
+            transform-origin: 50% 100%;
+            animation: flicker 850ms ease-in-out infinite alternate;
+            transition: opacity 250ms ease, transform 250ms ease;
+        }
+
+        .cake-art.is-blown .flame { transform: scale(0.15); opacity: 0; }
+
+        .sparkle {
+            transform-box: fill-box;
+            transform-origin: center;
+            animation: twinkle 2s ease-in-out infinite alternate;
+        }
+
+        .sparkle:nth-of-type(2) { animation-delay: 450ms; }
+
+        .page-section { padding: 92px 0 0; }
+
+        .section-heading {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 26px;
+        }
+
+        .section-heading .eyebrow { margin-bottom: 10px; }
+
+        h2 {
+            margin-bottom: 0;
+            font-size: clamp(2rem, 4vw, 2.9rem);
+            font-weight: 600;
+            letter-spacing: -0.04em;
+        }
+
+        .memories-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 17px;
+        }
+
+        .collage-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 17px;
+        }
+
+        .collage-panel {
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.92);
+            border-radius: 28px;
+            background: rgba(255,255,255,0.72);
+            box-shadow: 0 16px 42px rgba(106, 57, 80, 0.08);
+        }
+
+        .collage-panel img {
+            display: block;
+            width: 100%;
+            height: auto;
+            max-height: 760px;
+            object-fit: cover;
+        }
+
+        .memory-card {
+            min-height: 180px;
+            padding: 24px 23px;
+            border: 1px solid rgba(255,255,255,0.92);
+            border-radius: 22px;
+            background: var(--card);
+            box-shadow: 0 12px 35px rgba(106, 57, 80, 0.07);
+        }
+
+        .memory-icon {
+            display: grid;
+            width: 39px;
+            height: 39px;
+            margin-bottom: 17px;
+            place-items: center;
+            border-radius: 14px;
+            background: var(--rose-pale);
+            font-size: 1.1rem;
+        }
+
+        .memory-title {
+            margin-bottom: 8px;
+            font-size: 1.16rem;
+            font-weight: 600;
+        }
+
+        .memory-card p {
+            margin-bottom: 0;
+            color: var(--muted);
+            font-size: 0.86rem;
+            line-height: 1.65;
+        }
+
+        .closing-note {
+            margin: 78px 0 26px;
+            padding: 32px 22px;
+            border-top: 1px solid var(--line);
+            color: var(--muted);
+            text-align: center;
+        }
+
+        .closing-note p {
+            margin: 0;
+            font-family: "Playfair Display", Georgia, serif;
+            font-size: clamp(1.25rem, 3vw, 1.75rem);
+        }
+
+        .closing-note span { color: var(--rose); }
+
+        .confetti-piece {
+            position: fixed;
+            z-index: 20;
+            top: -20px;
+            left: var(--left);
+            width: var(--size);
+            height: calc(var(--size) * 1.5);
+            border-radius: 2px;
+            background: var(--color);
+            pointer-events: none;
+            animation: confetti-fall var(--duration) ease-in var(--delay) forwards;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            clip-path: inset(50%);
+        }
+
+        @keyframes cake-arrive {
+            from { transform: translateY(16px) scale(.94); opacity: 0; }
+            to { transform: translateY(0) scale(1); opacity: 1; }
+        }
+
+        @keyframes flicker {
+            from { transform: rotate(-4deg) scale(.94, 1.04); }
+            to { transform: rotate(4deg) scale(1.06, .96); }
+        }
+
+        @keyframes twinkle {
+            from { transform: scale(.78); opacity: .45; }
+            to { transform: scale(1.12); opacity: 1; }
+        }
+
+        @keyframes confetti-fall {
+            to { transform: translate3d(var(--drift), 110vh, 0) rotate(760deg); opacity: 0; }
+        }
+
+        @media (min-width: 761px) and (max-width: 900px) {
+            .hero-card {
+                min-height: auto;
+                grid-template-columns: 1fr;
+                gap: 0;
+                padding: 40px 48px 28px;
+            }
+            .hero-copy { text-align: center; }
+            .hero-copy h1, .hero-description { margin-right: auto; margin-left: auto; }
+            .hero-copy .eyebrow { justify-content: center; }
+            .wish-actions { justify-content: center; }
+            .cake-stage {
+                min-height: 290px;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                margin-top: 8px;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .page-shell { width: min(100% - 28px, 600px); }
+            .site-header { min-height: 70px; }
+            .site-nav { gap: 16px; }
+            .site-nav a { font-size: 0.8rem; }
+            .hero-card {
+                min-height: auto;
+                grid-template-columns: 1fr;
+                gap: 0;
+                padding: 38px 30px 24px;
+                border-radius: 28px;
+            }
+            .hero-copy { text-align: center; }
+            .hero-copy h1, .hero-description { margin-right: auto; margin-left: auto; }
+            .hero-copy .eyebrow { justify-content: center; }
+            .cake-stage {
+                min-height: 270px;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                margin-top: 8px;
+            }
+            .page-section { padding-top: 68px; }
+            .section-heading { align-items: start; flex-direction: column; gap: 10px; }
+            .section-intro { max-width: 440px; }
+            .memories-grid { grid-template-columns: 1fr; }
+            .collage-grid { grid-template-columns: 1fr; }
+            .memory-card { min-height: 0; }
+            .closing-note { margin-top: 58px; }
+        }
+
+        @media (max-width: 420px) {
+            .brand { font-size: 0.8rem; }
+            .brand-mark { width: 32px; height: 32px; }
+            .site-nav { gap: 11px; }
+            .site-nav a { font-size: 0.73rem; }
+            .hero-card { padding-right: 20px; padding-left: 20px; }
+            .hero-description { font-size: 0.95rem; }
+            .cake-stage { min-height: 230px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                scroll-behavior: auto !important;
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-shell">
+        <header class="site-header">
+            <a class="brand" href="#" aria-label="Sanona's birthday page home">
+                <span class="brand-mark" aria-hidden="true">✿</span>
+                <span>A little birthday magic</span>
+            </a>
+            <nav class="site-nav" aria-label="Page sections">
+                <a href="#birthday-notes">Birthday notes</a>
+            </nav>
+        </header>
+
+        <main>
+            <section class="hero-card" aria-labelledby="birthday-title">
+                <div class="hero-copy">
+                    <p class="eyebrow">A day made just for you</p>
+                    <h1 id="birthday-title">Happy birthday, <span>Sanona!</span></h1>
+                    <p class="hero-description">Here’s to your big laugh, your kind heart, and all the little moments that are better because you’re in them. Hope this year brings you everything you’ve been wishing for.</p>
+                    <div class="wish-actions">
+                        <button class="wish-button" id="mic-button" type="button">
+                            <span aria-hidden="true">♩</span>
+                            <span id="mic-button-label">Blow into the mic</span>
+                        </button>
+                        <button class="wish-button is-secondary" id="wish-button" type="button">
+                            <span id="wish-button-label">Tap to blow instead</span>
+                        </button>
+                    </div>
+                    <p class="wish-hint" id="wish-hint" aria-live="polite">Make a wish, then blow gently into your microphone—or use the tap option.</p>
+                </div>
+
+                <div class="cake-stage">
+                    <svg class="cake-art" id="cake-art" viewBox="0 0 400 340" role="img" aria-labelledby="cake-title cake-description">
+                        <title id="cake-title">A birthday cake with three glowing candles</title>
+                        <desc id="cake-description">A hand-drawn pink and cream strawberry cake on a cake stand.</desc>
+                        <defs>
+                            <linearGradient id="plateGradient" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0" stop-color="#fffefa"/>
+                                <stop offset="1" stop-color="#ead6d4"/>
+                            </linearGradient>
+                            <linearGradient id="cakeSide" x1="0" y1="0" x2="1" y2="0">
+                                <stop offset="0" stop-color="#df8797"/>
+                                <stop offset=".52" stop-color="#f2abb0"/>
+                                <stop offset="1" stop-color="#d97b90"/>
+                            </linearGradient>
+                            <linearGradient id="topSide" x1="0" y1="0" x2="1" y2="0">
+                                <stop offset="0" stop-color="#edb6af"/>
+                                <stop offset=".52" stop-color="#ffdbca"/>
+                                <stop offset="1" stop-color="#e7a89f"/>
+                            </linearGradient>
+                            <filter id="flameGlow" x="-150%" y="-150%" width="400%" height="400%">
+                                <feGaussianBlur stdDeviation="5" result="blur"/>
+                                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+                            </filter>
+                        </defs>
+
+                        <path class="sparkle" d="M76 116c2.2 7 3.6 8.4 10.6 10.6-7 2.2-8.4 3.6-10.6 10.6-2.2-7-3.6-8.4-10.6-10.6 7-2.2 8.4-3.6 10.6-10.6Z" fill="#e9ad54"/>
+                        <path class="sparkle" d="M318 96c1.8 5.6 2.9 6.7 8.5 8.5-5.6 1.8-6.7 2.9-8.5 8.5-1.8-5.6-2.9-6.7-8.5-8.5 5.6-1.8 6.7-2.9 8.5-8.5Z" fill="#dd879d"/>
+                        <circle cx="95" cy="169" r="3" fill="#e5b45c"/>
+                        <circle cx="306" cy="154" r="3" fill="#e5b45c"/>
+
+                        <path d="M187 270h26l10 28h-46l10-28Z" fill="#ead5d1"/>
+                        <ellipse cx="200" cy="300" rx="102" ry="13" fill="#d7b4b6"/>
+                        <ellipse cx="200" cy="294" rx="127" ry="18" fill="url(#plateGradient)" stroke="#d6b8b7" stroke-width="3"/>
+                        <ellipse cx="200" cy="290" rx="106" ry="10" fill="#fffdf8"/>
+
+                        <path d="M111 196c0-12 40-22 89-22s89 10 89 22v68c0 12-40 22-89 22s-89-10-89-22v-68Z" fill="url(#cakeSide)" stroke="#c86e83" stroke-width="2"/>
+                        <ellipse cx="200" cy="196" rx="89" ry="22" fill="#ffe4cc" stroke="#c86e83" stroke-width="2"/>
+                        <path d="M112 208c15 10 29 4 44 11s28-2 44 5 28-2 44 5 29-3 44-7v16c-15 6-29 12-44 5s-29 2-44-5-29 2-44-5-29-1-44-9v-16Z" fill="#fff3df" opacity=".95"/>
+                        <path d="M145 206c6 0 11 4 11 9s-5 8-11 8-11-3-11-8 5-9 11-9Zm110 10c6 0 11 4 11 9s-5 8-11 8-11-3-11-8 5-9 11-9Z" fill="#bd506d"/>
+                        <path d="M111 196c0-12 40-22 89-22s89 10 89 22-40 22-89 22-89-10-89-22Z" fill="#fff2dc" stroke="#c86e83" stroke-width="2"/>
+
+                        <path d="M143 141c0-9 26-17 57-17s57 8 57 17v42c0 9-26 17-57 17s-57-8-57-17v-42Z" fill="url(#topSide)" stroke="#ce8b87" stroke-width="2"/>
+                        <ellipse cx="200" cy="141" rx="57" ry="17" fill="#fff0de" stroke="#ce8b87" stroke-width="2"/>
+                        <path d="M144 151c10 7 19 2 29 7s19-2 29 4 19-3 28 2 17-1 26-5v14c-9 5-18 10-28 5s-18 3-28-2-19 2-29-4-18-1-27-7v-14Z" fill="#fffaf0"/>
+                        <path d="M143 141c0-9 26-17 57-17s57 8 57 17-26 17-57 17-57-8-57-17Z" fill="#fff4e5" stroke="#ce8b87" stroke-width="2"/>
+
+                        <g fill="#c95170">
+                            <path d="M174 135c0-9 13-14 18-6 4 7-7 15-15 18-2-4-3-8-3-12Z"/>
+                            <path d="M206 132c1-10 15-13 18-4 3 8-9 15-17 17-1-4-2-8-1-13Z"/>
+                            <path d="M193 145c0-8 12-13 17-6 4 7-6 14-14 17-2-4-3-7-3-11Z"/>
+                        </g>
+                        <g fill="#5f8b61">
+                            <path d="m184 128 1-8 6 6 6-4-2 9Z"/>
+                            <path d="m212 126 2-8 5 7 7-3-4 8Z"/>
+                            <path d="m194 141 1-8 6 6 6-3-3 8Z"/>
+                        </g>
+
+                        <g class="candles">
+                            <g>
+                                <rect x="161" y="92" width="10" height="33" rx="4" fill="#fff9ef"/>
+                                <path d="M163 94v29" stroke="#df8ca0" stroke-width="3" stroke-dasharray="5 6"/>
+                                <path class="flame" d="M166 64c-1 10-11 15-8 23 3 8 14 7 17 0 4-9-7-15-9-23Z" fill="#ffb84f" filter="url(#flameGlow)"/>
+                                <path d="M166 75c-1 5-5 8-3 12 2 4 7 3 9 0 2-5-4-8-6-12Z" fill="#fff6c7"/>
+                            </g>
+                            <g>
+                                <rect x="195" y="87" width="10" height="35" rx="4" fill="#fff9ef"/>
+                                <path d="M197 90v29" stroke="#df8ca0" stroke-width="3" stroke-dasharray="5 6"/>
+                                <path class="flame" d="M200 58c-1 10-11 15-8 23 3 8 14 7 17 0 4-9-7-15-9-23Z" fill="#ffb84f" filter="url(#flameGlow)"/>
+                                <path d="M200 69c-1 5-5 8-3 12 2 4 7 3 9 0 2-5-4-8-6-12Z" fill="#fff6c7"/>
+                            </g>
+                            <g>
+                                <rect x="229" y="92" width="10" height="33" rx="4" fill="#fff9ef"/>
+                                <path d="M231 94v29" stroke="#df8ca0" stroke-width="3" stroke-dasharray="5 6"/>
+                                <path class="flame" d="M234 64c-1 10-11 15-8 23 3 8 14 7 17 0 4-9-7-15-9-23Z" fill="#ffb84f" filter="url(#flameGlow)"/>
+                                <path d="M234 75c-1 5-5 8-3 12 2 4 7 3 9 0 2-5-4-8-6-12Z" fill="#fff6c7"/>
+                            </g>
+                        </g>
+                    </svg>
+                    <img class="birthday-portrait" src="sanona_single.png" alt="Sanona celebrating her birthday">
+                </div>
+            </section>
+
+            <section class="page-section" id="memories" aria-labelledby="memories-title">
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">A little laughter</p>
+                        <h2 id="memories-title">Funny collage</h2>
+                    </div>
+                </div>
+
+                <div class="collage-grid">
+                    <div class="collage-panel">
+                        <img src="funny.jpeg" alt="Funny collage for Sanona">
+                    </div>
+                    <div class="collage-panel">
+                        <img src="cute.jpeg" alt="Cute collage for Sanona">
+                    </div>
+                </div>
+            </section>
+
+            <section class="page-section" id="birthday-notes" aria-labelledby="notes-title">
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">A few things worth celebrating</p>
+                        <h2 id="notes-title">Birthday notes for you</h2>
+                    </div>
+                </div>
+                <div class="memories-grid">
+                    <article class="memory-card">
+                        <span class="memory-icon" aria-hidden="true">☀</span>
+                        <h3 class="memory-title">Your kind of magic</h3>
+                        <p>You have a way of making even an ordinary day feel like a story we’ll laugh about later.</p>
+                    </article>
+                    <article class="memory-card">
+                        <span class="memory-icon" aria-hidden="true">♡</span>
+                        <h3 class="memory-title">Partners in chaos</h3>
+                        <p>We might be absolute idiots sometimes, but that’s what makes this friendship unbeatable.</p>
+                    </article>
+                    <article class="memory-card">
+                        <span class="memory-icon" aria-hidden="true">✧</span>
+                        <h3 class="memory-title">One last thing...</h3>
+                        <p>Aur ek baat aur: REPTA Khayegi! Some traditions are simply too important to skip.</p>
+                    </article>
+                </div>
+            </section>
+
+            <footer class="closing-note">
+                <p>So lucky to have you in my life. <span>Happy birthday, Sanona!</span> ♡</p>
+            </footer>
+        </main>
+    </div>
+    <p class="sr-only" id="celebration-announcement" aria-live="polite"></p>
+
+    <script>
+        const wishButton = document.getElementById("wish-button");
+        const wishButtonLabel = document.getElementById("wish-button-label");
+        const micButton = document.getElementById("mic-button");
+        const micButtonLabel = document.getElementById("mic-button-label");
+        const wishHint = document.getElementById("wish-hint");
+        const cakeArt = document.getElementById("cake-art");
+        const celebrationAnnouncement = document.getElementById("celebration-announcement");
+        let wishMade = false;
+        let audioContext;
+        let analyser;
+        let audioStream;
+        let audioFrame;
+        let microphoneTimeout;
+        let loudFrames = 0;
+
+        function stopMicrophone() {
+            if (audioFrame) {
+                cancelAnimationFrame(audioFrame);
+                audioFrame = undefined;
+            }
+            if (microphoneTimeout) {
+                window.clearTimeout(microphoneTimeout);
+                microphoneTimeout = undefined;
+            }
+            if (audioStream) {
+                audioStream.getTracks().forEach(track => track.stop());
+                audioStream = undefined;
+            }
+            if (audioContext && audioContext.state !== "closed") {
+                audioContext.close().catch(error => console.error("Unable to close the microphone audio context:", error));
+            }
+            audioContext = undefined;
+            analyser = undefined;
+            loudFrames = 0;
+            micButtonLabel.textContent = "Blow into the mic";
+        }
+
+        function launchConfetti() {
+            const colors = ["#e5849b", "#f3c76b", "#8ec6c1", "#b69ad5", "#f4a183"];
+            for (let index = 0; index < 65; index += 1) {
+                const piece = document.createElement("span");
+                const duration = 2.4 + Math.random() * 2.2;
+                piece.className = "confetti-piece";
+                piece.setAttribute("aria-hidden", "true");
+                piece.style.setProperty("--left", `${Math.random() * 100}vw`);
+                piece.style.setProperty("--size", `${5 + Math.random() * 7}px`);
+                piece.style.setProperty("--color", colors[Math.floor(Math.random() * colors.length)]);
+                piece.style.setProperty("--duration", `${duration}s`);
+                piece.style.setProperty("--delay", `${Math.random() * 0.65}s`);
+                piece.style.setProperty("--drift", `${Math.round((Math.random() - 0.5) * 200)}px`);
+                document.body.appendChild(piece);
+                window.setTimeout(() => piece.remove(), (duration + 0.8) * 1000);
+            }
+        }
+
+        function blowOutCandles() {
+            if (wishMade) return;
+            wishMade = true;
+            stopMicrophone();
+            cakeArt.classList.add("is-blown");
+            wishButtonLabel.textContent = "Make another wish";
+            wishHint.textContent = "Wish made! May this year be your happiest one yet.";
+            celebrationAnnouncement.textContent = "The candles are out. Happy birthday, Sanona!";
+            launchConfetti();
+        }
+
+        wishButton.addEventListener("click", () => {
+            if (wishMade) {
+                wishMade = false;
+                cakeArt.classList.remove("is-blown");
+                wishButtonLabel.textContent = "Tap to blow instead";
+                wishHint.textContent = "Make a wish, then blow gently into your microphone—or use the tap option.";
+                celebrationAnnouncement.textContent = "The candles are glowing again.";
+                return;
+            }
+            blowOutCandles();
+        });
+
+        function checkMicrophoneVolume() {
+            if (!analyser || wishMade) return;
+            const samples = new Uint8Array(analyser.fftSize);
+            analyser.getByteTimeDomainData(samples);
+            let squaredTotal = 0;
+            for (const sample of samples) {
+                const amplitude = (sample - 128) / 128;
+                squaredTotal += amplitude * amplitude;
+            }
+            const volume = Math.sqrt(squaredTotal / samples.length);
+            loudFrames = volume > 0.13 ? loudFrames + 1 : 0;
+            if (loudFrames >= 5) {
+                blowOutCandles();
+                return;
+            }
+            audioFrame = requestAnimationFrame(checkMicrophoneVolume);
+        }
+
+        async function startMicrophone() {
+            if (wishMade) {
+                wishHint.textContent = "Tap “Make another wish” to relight the candles first.";
+                return;
+            }
+            if (audioStream) {
+                stopMicrophone();
+                wishHint.textContent = "Microphone paused. Blow into the mic whenever you’re ready.";
+                return;
+            }
+            if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+                wishHint.textContent = "Microphone access isn’t available here. Use the tap option to blow out the candles.";
+                return;
+            }
+
+            micButton.disabled = true;
+            wishHint.textContent = "Waiting for microphone permission...";
+            try {
+                audioStream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+                if (!AudioContextClass) {
+                    throw new Error("Audio capture is not supported in this browser.");
+                }
+                audioContext = new AudioContextClass();
+                await audioContext.resume();
+                analyser = audioContext.createAnalyser();
+                analyser.fftSize = 512;
+                analyser.smoothingTimeConstant = 0.25;
+                audioContext.createMediaStreamSource(audioStream).connect(analyser);
+                micButtonLabel.textContent = "Stop listening";
+                wishHint.textContent = "Microphone on! Blow gently toward it to put out the candles.";
+                audioFrame = requestAnimationFrame(checkMicrophoneVolume);
+                microphoneTimeout = window.setTimeout(() => {
+                    stopMicrophone();
+                    wishHint.textContent = "No blow detected yet. Try the microphone again or use the tap option.";
+                }, 20000);
+            } catch (error) {
+                stopMicrophone();
+                console.error("Unable to start birthday candle microphone detection:", error);
+                wishHint.textContent = "Microphone unavailable or permission denied. You can still blow out the candles with the tap option.";
+            } finally {
+                micButton.disabled = false;
+            }
+        }
+
+        micButton.addEventListener("click", startMicrophone);
+        window.addEventListener("pagehide", stopMicrophone);
+
+    </script>
+</body>
+</html>
